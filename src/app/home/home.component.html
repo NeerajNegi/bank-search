@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="bank-list-wrapper">
+    <div class="search-form">
+
+      <form [formGroup]="searchForm">
+        <div class="form-row">
+          <div class="col">
+            <select class="form-control" formControlName="city" name="city">
+              <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+            </select>
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" formControlName="query" placeholder="Search">
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <p *ngIf="loading">Loading .... </p>
+    <div class="table-wrapper" [hidden]="loading">
+      <table mat-table [dataSource]="dataSource" *ngIf="!loading">
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef> Address </th>
+          <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="bank_name">
+          <th mat-header-cell *matHeaderCellDef> Bank Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.bank_name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="branch">
+          <th mat-header-cell *matHeaderCellDef> Branch </th>
+          <td mat-cell *matCellDef="let element"> {{element.branch}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef> City </th>
+          <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef> State </th>
+          <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: tableColumns;"
+          (click)="goToBankDetails(row)"></tr>
+      </table>
+      <mat-paginator #paginator 
+        [pageSizeOptions]="[5, 10, 15, 20, 25, 30]" 
+        [hidden]="loading"
+        showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Bank Details</h1>
+  <h4>Bank Name: {{ bank.bank_name }}</h4>
+  <p>Address: {{ bank.address }}</p>
+  <p>Branch: {{ bank.branch }}</p>
+  <p>City: {{ bank.city }}</p>
+  <p>State: {{ bank.state }}</p>
+
+  <a [routerLink]="['/home']" >go back</a>
+
+  <button (click)="markAsFavourite()" *ngIf="!isFav">Mark as 💓</button>
+  <p *ngIf='isFav'>Marked as 💓</p>
+</div>
